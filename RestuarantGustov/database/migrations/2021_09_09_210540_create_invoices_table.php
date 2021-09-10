@@ -9,11 +9,11 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nit')->nullable();
-            $table->string('codeBill')->nullable();
-            $table->dateTime('date');
+            $table->string('codeBill');
             $table->double('total');
             $table->timestamps();
+            $table->unsignedBigInteger('customer_id')->nullable();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
         });
     }
     public function down()

@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class customer extends Model
 {
     public function invoices(){
-        return $this->hasMany(Menu::class, 'invoices');
+        return $this->hasMany('App\Models\Invoice');
     }
 }

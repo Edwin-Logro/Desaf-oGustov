@@ -17,7 +17,8 @@ class CreateMenuInvoicesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('menu_id');
             $table->unsignedBigInteger('invoice_id');
-            $table->double('numer');
+            $table->Integer('number');
+            $table->double('subTotal');
             $table->foreign('menu_id')->references('id')->on('menus');
             $table->foreign('invoice_id')->references('id')->on('invoices');
             $table->timestamps();

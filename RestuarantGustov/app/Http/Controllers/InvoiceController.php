@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Menu;
 use App\Models\Customer;
+use App\Models\MenuInvoice;
+use Uuid;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 
@@ -22,67 +24,59 @@ class InvoiceController extends Controller
     }
     public function store(Request $request)
     {  
-        $code='Gustov';
-        $date = new DateTime();
-        $sum=0;
-        $limit = count($request->id);
-        for($i=0 ; $i < $limit; $i++){
-            //$invoice->save();
-            $menu = new Menu;
-            $menu = $request->number[$i] * $request->price[$i];
-            $sum = $sum+$menu;
+        
+        if(Invoice::verifySale($request->number))
+        {
+           // return response()->json($request);
+           //Costume
+            $custome = new Customer();
+            $custome->name= $request->name;
+            $custome->nit= $request->nit;
+            $custome->ci= $request->ci;
+            $custome->save();
+            //Invoice
+            $limit = count($request->id);
             //register Invoices
-            $invoice = new Invoice;
-            $invoice->number = $request->number[$i];
-            //$invoice->menus()->attach($request->id[$i]);
-             $invoice->save();
-           // $invoice->save();
+            $invoice = new Invoice();
+            
+            $invoice->codeBill = (string) Uuid::generate();
+            $invoice->total = Invoice::calculateTotal($request->number,$request->price);
+            $invoice->customer_id= $custome->id;
+            $invoice->save();
+        
+            for($i=0 ; $i < $limit; $i++){
+                if($request->number[$i])
+                {
+                    $menu = Menu::where('id',(int)$request->id[$i])->first();
+                    $menuInvoice = new MenuInvoice();
+                    $menuInvoice->number=(int)$request->number[$i];
+                    $menuInvoice->subTotal = (float)$request->number[$i] * (float)$request->price[$i];
+                    $menuInvoice->menu_id= $menu->id;
+                    $menuInvoice->invoice_id=$invoice->id;
+                    $menuInvoice->save();
+                }
+            
+            }
         }
-        
-            $invoice->nit = $request->nit;
-            $invoice->codeBill= 45678894+ $sum;
-            $invoice->date = $date->format('Y-m-d');
-            $invoice->number = $request->number;
-            $invoice->total = $sum;
-           // $invoice->save();
-        return response()->json($invoice);
-        
-        //return redirect('/invoices');
+           
+        return redirect('/invoices');
     }
     public function show(Invoice $invoice)
     {
-        //
+        //Invoice::whereBetween('created_at', [$request->date_init, $request->date_end])->with(['customer', 'menu_invoices.menu'])->get();
+        //Invoice::with(['customer', 'menus'])->get();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Invoice $invoice)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Invoice $invoice)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Invoice $invoice)
     {
         //

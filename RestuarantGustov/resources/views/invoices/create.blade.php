@@ -72,11 +72,6 @@
                                     
                                     <tr> 
                                         <td>
-                                       <input type="number" name="number[]" class="form-control" id="number" placeholder="quantity" >
-                                    
-                                        </td>     
-                                        </td>
-                                        <td>
                                         <input type="hidden" name="id[]" class="form-control" id="id" value="{{ $menu->id }}" >{{ $menu->id }}
                                         </td>
                                         <td><input type="hidden" name="nameMenu[]" class="form-control" id="nameMenu" value="{{ $menu->nameMenu }}">{{ $menu->nameMenu }}
@@ -87,17 +82,24 @@
                                         </td>
                                         <td><input type="hidden" name="photo[]" class="form-control" id="name" value="{{ $menu->photo }}" ><img src="{{ asset('storage').'/'.$menu->photo}}" height="150" width="150" alt="">
                                         </td>
-                                    
+                                        <td>
+                                            <input type="number" name="number[]" class="form-control" id="number" placeholder="quantity" >
+                                        
+                                            </td>
                                         @if($menu->state==1)
                                         <td>
                                         <span class="badge badge-light-success badge-pill ml-50">ACTIVE</span>
                                         </td>
                                         @else
                                         <td> <span class="badge badge-light-danger badge-pill ml-50">DESACTIVE</span>
-                                    </td>   
-                                        @endif
-                                        <td> 
                                         
+                                        </td>   
+                                        
+                                        @endif
+                                       
+                                       
+                                        <td> 
+                                       
                                     </tr>
                                     @endforeach  
                                                                     
