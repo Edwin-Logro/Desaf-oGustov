@@ -57,7 +57,7 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="">   
-            <li class=" nav-item"><a href="#"><i class="bx bx-menu"></i><span class="menu-title" data-i18n="Menu Levels">Menu</span></a>    <ul class="menu-content">
+            <li class=" nav-item"><a href="#"><i class="bx bx-menu"></i><span class="menu-title" data-i18n="Menu Levels">Menú</span></a>    <ul class="menu-content">
                         <li><a href="{{ url('/menu/create') }}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Avatar">Register Menú</a>
                         </li>
                         <li><a href="{{ url('/menu/') }}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Divider">Lists Menu</span></a>
@@ -65,11 +65,11 @@
                     </ul>
                 </li>
                 </li>
-                <li class=" nav-item"><a href="#"><i class="bx bx-menu"></i><span class="menu-title" data-i18n="Menu Levels">Menu Levels</span></a>
+                <li class=" nav-item"><a href="#"><i class="bx bx-menu"></i><span class="menu-title" data-i18n="Menu Levels">Sale</span></a>
                     <ul class="menu-content">
-                        <li><a href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Second Level</span></a>
+                        <li><a href="{{ url('/invoice/create') }}"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Register Sale</span></a>
                         </li>
-                        <li><a href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Second Level</span></a>
+                        <li><a href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Second Level">Reports</span></a>
                             <ul class="menu-content">
                                 <li><a href="#"><i class="bx bx-right-arrow-alt"></i><span class="menu-item" data-i18n="Third Level">Third Level</span></a>
                                 </li>

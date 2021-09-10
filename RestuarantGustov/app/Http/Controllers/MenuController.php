@@ -7,7 +7,6 @@ class MenuController extends Controller
 {
     public function index()
     {
-        //$menus['menus'] = ;
         $menus['menus'] = Menu::orderBy('id','desc')->get();
         return view('menus.index',$menus);
     }
